@@ -35,7 +35,7 @@ $ bash install_nvm.sh
 $ source ~/.profile
 $ sudo reboot
 $ nvm install v12.18.3
-$ node ?v
-$ npm ?v 
+$ node -v
+$ npm -v 
 ```
 <img src="image2.png" alt="drawing" width="400"/><br>
