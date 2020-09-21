@@ -28,7 +28,7 @@ echo "No images available for deletion"
 else
 docker rmi -f $DOCKER_IMAGE_IDS
 fi
-
+rm -rf system-genesis-block/*.block organizations/peerOrganizations organizations/ordererOrganizations
 # # remove orderer block and other channel configuration transactions and certs
 # docker run --rm -v $(pwd):/data busybox sh -c 'cd /data && rm -rf system-genesis-block/*.block organizations/peerOrganizations organizations/ordererOrganizations'
 
