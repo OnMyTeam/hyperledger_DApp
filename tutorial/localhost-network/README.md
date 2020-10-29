@@ -25,6 +25,7 @@ $ docker version
 
 ```
 <img src="images/image1.png" alt="drawing" width="450"/><br>
+
 ## 2. nodeJS 설치
 
 ```
@@ -58,6 +59,7 @@ $ source ~/.profile
 $ mv $HOME/hyperledger/tutorial/localhost-network/ $HOME/go/src/fabric-samples/
 $ cd $HOME/go/src/fabric-samples
 ```
+
 ## 5. 네트워크 구성 및 확장
 ### 5.1 localhost-network directory 구성정보
 * application: hyperledger network 연동 및 admin, user 등록
@@ -65,6 +67,7 @@ $ cd $HOME/go/src/fabric-samples
 * network: 네트워크 구축
 <br>
 <img src="images/image5.png" alt="drawing" width="450"/><br>
+
 ### 5.2 네트워크 구동을 위한 사전 작업
 * Peer, Orderer의 MSP 구성 및 genesis block 생성.
 * 이때 CA는 Org1의 CA를 의미함.
@@ -74,6 +77,7 @@ $ cd $HOME/go/src/faric-samples/localhost-network/network
 $ ./generate.sh
 ```
 <img src="images/image6.PNG" alt="drawing" width="700"/><br>
+
 ### 5.3 네트워크 구동 
 * Peer, Orderer, CA 컨테이너 구동
 * mychannel 생성
@@ -86,6 +90,7 @@ $ docker ps -a
 ```
 <img src="images/image7.PNG" alt="drawing" width="700"/><br>
 <img src="images/image8.PNG" alt="drawing" width="700"/><br>
+
 ## 6. 체인코드 설치
 * 패키징(packaging)
 * 각 Org내 Peer별 설치(install)
