@@ -102,3 +102,21 @@ $ ./deployCC.sh
 ```
 <img src="images/image9.PNG" alt="drawing" width="700"/><br>
 <img src="images/image10.PNG" alt="drawing" width="700"/><br>
+
+## 7. 어플리케이션 연동
+* gateway 연결 정보 생성(ccp-generate.sh)
+* Node.js SDK 설치(fabric-ca-client, fabric-common, fabric-network, fabric-protos)
+* Admin 등록(enrollAdmin.js)
+* User 등록(registerUser.js)
+* 웹 서버(server.js) 실행
+* http://localhost:8000
+```
+$ cd $HOME/go/src/fabric-samples/localhost-network/network/organizations
+$ ./ccp-generate.sh
+$ cd $HOME/go/src/fabric-samples/localhost-network/application
+$ npm install
+$ node enrollAdmin.js
+$ node registerUser.js
+$ node server.js
+```
+<img src="images/image11.PNG" alt="drawing" width="700"/><br>
