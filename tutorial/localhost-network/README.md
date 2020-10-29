@@ -1,7 +1,7 @@
 ## hyperledger v2.2 localhost network 구축
 
-하이퍼레저 v2.2를 활용하여 단일 host에서 여러개의 컨테이너로 네트워크를 구축함.<br>
-<img src="images/image3.jpg" alt="drawing" width="450"/><br>
+하이퍼레저 v2.2를 활용하여 단일 host에서 여러개의 컨테이너로 네트워크를 구축함.<br><br>
+<img src="images/image3.jpg" alt="drawing" width="700"/><br>
 * Operating system: 18.04.02 LTS live-server
 * Go version: 1.14
 * NodeJS version: 12.18.3
@@ -24,7 +24,7 @@ $ sudo reboot
 $ docker version 
 
 ```
-<img src="images/image1.png" alt="drawing" width="450"/><br>
+<img src="images/image1.png" alt="drawing" width="500"/><br>
 
 ## 2. nodeJS 설치
 
@@ -39,7 +39,7 @@ $ nvm install v12.18.3
 $ node -v
 $ npm -v 
 ```
-<img src="images/image2.png" alt="drawing" width="450"/><br>
+<img src="images/image2.png" alt="drawing" width="600"/><br>
 
 ## 3. Hyperledger fabric samples v2.2 설치
 ```
@@ -51,7 +51,7 @@ $ sudo vim ~/.profile
   아래 참고하여 환경변수 등록
 $ source ~/.profile
 ```
-<img src="images/image4.png" alt="drawing" width="450"/><br>
+<img src="images/image4.png" alt="drawing" width="600"/><br>
 ## 4. localhost-network 디렉토리 이동
 다운 받은 localhost-network 디렉토리를 설치한 fabric-samples 디렉토리로 이동 시킴.<br>
 이후, fabric-samples 디렉토리에서 작업 진행
@@ -66,7 +66,7 @@ $ cd $HOME/go/src/fabric-samples
 * contract: chaincode(fabcar)
 * network: 네트워크 구축
 <br>
-<img src="images/image5.png" alt="drawing" width="450"/><br>
+<img src="images/image5.png" alt="drawing" width="600"/><br>
 
 ### 5.2 네트워크 구동을 위한 사전 작업
 * Peer, Orderer의 MSP 구성 및 genesis block 생성.
