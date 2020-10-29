@@ -7,15 +7,18 @@ var bodyParser = require('body-parser');
 const PORT = 8000;
 const HOST = "0.0.0.0";
 
- // Hyperledger Bridge
-const { FileSystemWallet, Gateway } = require('fabric-network');
+// Hyperledger Bridge
+const { Gateway, Wallets } = require('fabric-network');
 const fs = require('fs');
 const path = require('path');
+
 const ccpPath = path.resolve(__dirname, '..', 'network', 'organizations', 'peerOrganizations', 'org1.example.com', 'connection-org1.json');
-const ccpJSON = fs.readFileSync(ccpPath, 'utf8');
-const ccp = JSON.parse(ccpJSON);
+const ccp = JSON.parse(fs.readFileSync(ccpPath, 'utf8'));
+
 const walletPath = path.join(process.cwd(), 'wallet');
-const wallet = new FileSystemWallet(walletPath);
+
+
+
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
@@ -50,22 +53,22 @@ app.get('/changeowner', function (req, res) {
 
 
 app.get('/api/querycars', async function (req, res) {
+    var wallet = await Wallets.newFileSystemWallet(walletPath);
+    const userExists = await wallet.get('appUser');
+    if (!userExists) {
+        console.log('An identity for the user "appUser" does not exist in the wallet');
+        console.log('Run the registerUser.js application before retrying');
+        return;
+    }
+    const gateway = new Gateway();
+    await gateway.connect(ccp, { wallet, identity: 'appUser', discovery: { enabled: true} });
+    const network = await gateway.getNetwork('mychannel');
+    const contract = network.getContract('fabcar');
+    const result = await contract.evaluateTransaction('queryAllCars');
+    console.log(`Transaction has been evaluated, result is: ${result.toString()}`);
 
-        const userExists = await wallet.exists('user1');
-        if (!userExists) {
-            console.log('An identity for the user "user1" does not exist in the wallet');
-            console.log('Run the registerUser.js application before retrying');
-            return;
-        }
-        const gateway = new Gateway();
-        await gateway.connect(ccp, { wallet, identity: 'user1', discovery: { enabled: false } });
-        const network = await gateway.getNetwork('mychannel');
-        const contract = network.getContract('fabcar');
-        const result = await contract.evaluateTransaction('queryAllCars');
-        console.log(`Transaction has been evaluated, result is: ${result.toString()}`);
-
-        var obj = JSON.parse(result)
-        res.json(obj)
+    var obj = JSON.parse(result)
+    res.json(obj)
 });
 
 // localhost:8080/api/querycar?carno=CAR5
@@ -73,15 +76,15 @@ app.get('/api/querycar/', async function (req, res) {
     try {
 	var carno = req.query.carno;
 	console.log(carno);
-
-    const userExists = await wallet.exists('user1');
+    var wallet = await Wallets.newFileSystemWallet(walletPath);
+    const userExists = await wallet.get('appUser');
         if (!userExists) {
-            console.log('An identity for the user "user1" does not exist in the wallet');
+            console.log('An identity for the user "appUser" does not exist in the wallet');
             console.log('Run the registerUser.js application before retrying');
             return;
         }
         const gateway = new Gateway();
-        await gateway.connect(ccp, { wallet, identity: 'user1', discovery: { enabled: false } });
+        await gateway.connect(ccp, { wallet, identity: 'appUser', discovery: { enabled: true } });
         const network = await gateway.getNetwork('mychannel');
         const contract = network.getContract('fabcar');
         const result = await contract.evaluateTransaction('queryCar', carno);
@@ -100,15 +103,15 @@ app.post('/api/createcar/', async function (req, res) {
 	var make = req.body.make;
 	var model = req.body.model;
 	var owner = req.body.owner;
-
-        const userExists = await wallet.exists('user1');
+    var wallet = await Wallets.newFileSystemWallet(walletPath);        
+        const userExists = await wallet.get('appUser');
         if (!userExists) {
-            console.log('An identity for the user "user1" does not exist in the wallet');
+            console.log('An identity for the user "appUser" does not exist in the wallet');
             console.log('Run the registerUser.js application before retrying');
             return;
         }
         const gateway = new Gateway();
-        await gateway.connect(ccp, { wallet, identity: 'user1', discovery: { enabled: false } }); 
+        await gateway.connect(ccp, { wallet, identity: 'appUser', discovery: { enabled: true } }); 
         const network = await gateway.getNetwork('mychannel');
         const contract = network.getContract('fabcar');
 
@@ -129,15 +132,15 @@ app.post('/api/changeowner/', async function (req, res) {
     try {
         var carno = req.body.carno;
         var owner = req.body.owner;
-
-        const userExists = await wallet.exists('user1');
+        var wallet = await Wallets.newFileSystemWallet(walletPath);
+        const userExists = await wallet.get('appUser');
         if (!userExists) {
             console.log('An identity for the user "user1" does not exist in the wallet');
             console.log('Run the registerUser.js application before retrying');
             return;
         }
         const gateway = new Gateway();
-        await gateway.connect(ccp, { wallet, identity: 'user1', discovery: { enabled: false } }); 
+        await gateway.connect(ccp, { wallet, identity: 'appUser', discovery: { enabled: true } }); 
 
         const network = await gateway.getNetwork('mychannel');
         const contract = network.getContract('fabcar');
