@@ -59,9 +59,41 @@ $ mv $HOME/hyperledger/tutorial/localhost-network/ $HOME/go/src/fabric-samples/
 $ cd $HOME/go/src/fabric-samples
 ```
 ## 5. 네트워크 구성 및 확장
-### 5.1 localhost-network directory
+### 5.1 localhost-network directory 구성정보
 * application: hyperledger network 연동 및 admin, user 등록
 * contract: chaincode(fabcar)
 * network: 네트워크 구축
 <br>
 <img src="images/image5.png" alt="drawing" width="450"/><br>
+### 5.2 네트워크 구동을 위한 사전 작업
+* Peer, Orderer의 MSP 구성 및 genesis block 생성.
+* 이때 CA는 Org1의 CA를 의미함.
+* 간단한 실습을 위해 Org1에만 CA를 구동 하였으며, 각 Org에 CA서버를 구동하는 것이 좋음.
+```
+$ cd $HOME/go/src/faric-samples/localhost-network/network
+$ ./generate.sh
+```
+<img src="images/image6.PNG" alt="drawing" width="700"/><br>
+### 5.3 네트워크 구동 
+* Peer, Orderer, CA 컨테이너 구동
+* mychannel 생성
+* 각 Org내 Peer별 mychannel 가입
+* 각 Org내 AnchoPeer 업데이트
+```
+$ cd $HOME/go/src/faric-samples/localhost-network/network
+$ ./start.sh
+$ docker ps -a
+```
+<img src="images/image7.PNG" alt="drawing" width="700"/><br>
+<img src="images/image8.PNG" alt="drawing" width="700"/><br>
+## 6. 체인코드 설치
+* 패키징(packaging)
+* 각 Org내 Peer별 설치(install)
+* 각 Org내 Peer별 definition 승인(approve)
+* 커밋(commit)
+```
+$ cd $HOME/go/src/faric-samples/localhost-network/network
+$ ./deployCC.sh
+```
+<img src="images/image9.PNG" alt="drawing" width="700"/><br>
+<img src="images/image10.PNG" alt="drawing" width="700"/><br>
