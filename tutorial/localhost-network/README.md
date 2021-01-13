@@ -41,7 +41,20 @@ $ npm -v
 ```
 <img src="images/image2.png" alt="drawing" width="600"/><br>
 
-## 3. Hyperledger fabric samples v2.2 설치
+## 3. golang 설치
+
+```
+$ wget https://dl.google.com/go/go1.14.6.linux-amd64.tar.gz
+$ sudo tar -C /usr/local -xzf go1.14.6.linux-amd64.tar.gz
+$ echo 'export PATH=$PATH:/usr/local/go/bin' | sudo tee -a /etc/profile
+$ echo 'export GOPATH=$HOME/go' | tee -a $HOME/.bashrc
+$ echo 'export PATH=$PATH:$GOROOT/bin:$GOPATH/bin' | tee -a $HOME/.bashrc
+$ sudo reboot
+$ go version
+```
+<img src="images/image12.PNG" alt="drawing" width="600"/><br>
+
+## 4. Hyperledger fabric samples v2.2 설치
 ```
 $ mkdir -p $HOME/go/{src,pkg,bin}
 $ cd ~/go/src
@@ -52,7 +65,8 @@ $ sudo vim ~/.profile
 $ source ~/.profile
 ```
 <img src="images/image4.png" alt="drawing" width="600"/><br>
-## 4. localhost-network 디렉토리 이동
+
+## 5. localhost-network 디렉토리 이동
 다운 받은 localhost-network 디렉토리를 설치한 fabric-samples 디렉토리로 이동 시킴.<br>
 이후, fabric-samples 디렉토리에서 작업 진행
 ```
@@ -60,15 +74,15 @@ $ mv $HOME/hyperledger/tutorial/localhost-network/ $HOME/go/src/fabric-samples/
 $ cd $HOME/go/src/fabric-samples
 ```
 
-## 5. 네트워크 구성 및 확장
-### 5.1 localhost-network directory 구성정보
+## 6. 네트워크 구성 및 확장
+### 6.1 localhost-network directory 구성정보
 * application: hyperledger network 연동 및 admin, user 등록
 * contract: chaincode(fabcar)
 * network: 네트워크 구축
 <br>
 <img src="images/image5.png" alt="drawing" width="600"/><br>
 
-### 5.2 네트워크 구동을 위한 사전 작업
+### 6.2 네트워크 구동을 위한 사전 작업
 * Peer, Orderer의 MSP 구성 및 genesis block 생성.
 * 이때 CA는 Org1의 CA를 의미함.
 * 간단한 실습을 위해 Org1에만 CA를 구동 하였으며, 각 Org에 CA서버를 구동하는 것이 좋음.
@@ -78,7 +92,7 @@ $ ./generate.sh
 ```
 <img src="images/image6.PNG" alt="drawing" width="700"/><br>
 
-### 5.3 네트워크 구동 
+### 6.3 네트워크 구동 
 * Peer, Orderer, CA 컨테이너 구동
 * mychannel 생성
 * 각 Org내 Peer별 mychannel 가입
@@ -91,7 +105,7 @@ $ docker ps -a
 <img src="images/image7.PNG" alt="drawing" width="700"/><br>
 <img src="images/image8.PNG" alt="drawing" width="700"/><br>
 
-## 6. 체인코드 설치
+## 7. 체인코드 설치
 * 패키징(packaging)
 * 각 Org내 Peer별 설치(install)
 * 각 Org내 Peer별 definition 승인(approve)
@@ -103,7 +117,7 @@ $ ./deployCC.sh
 <img src="images/image9.PNG" alt="drawing" width="700"/><br>
 <img src="images/image10.PNG" alt="drawing" width="700"/><br>
 
-## 7. 어플리케이션 연동
+## 8. 어플리케이션 연동
 * gateway 연결 정보 생성(ccp-generate.sh)
 * Node.js SDK 설치(fabric-ca-client, fabric-common, fabric-network, fabric-protos)
 * Admin 등록(enrollAdmin.js)
