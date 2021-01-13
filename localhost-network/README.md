@@ -64,6 +64,7 @@ $ sudo vim ~/.profile
   아래 참고하여 환경변수 등록
 $ source ~/.profile
 ```
+
 <img src="images/image4.png" alt="drawing" width="600"/><br>
 
 ## 5. localhost-network 디렉토리 이동
