@@ -12,6 +12,7 @@
 <br>
 트랜잭션 처리 과정을 설명하기 전 이미 채널은 구성되어있고 네트워크가 동작 중이며, 트랜잭션을 전송하는 사용자는 CA(Certificate Authority)에 의해 register와 enroll이 되어있어 네트워크에 인증하는데 필요한 증명서(Certificate)를 발급받았다고 가정합니다.<br>
 chaincode는 각 Peer에 설치 되어있고, 설치한 체인코드에는 트랜잭션에 의해 실행될 함수들이 정의되어있습니다. chaincode를 설치한 Peer는 트랜잭션을 받으면 반드시 실행(simulation)을 해야하고 그 결과를 Client에게 전송해 주어야 합니다.
+<br><br>
 
 ### 2. Client A initiates a transaction
 <br>
